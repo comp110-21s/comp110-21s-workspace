@@ -1,0 +1,35 @@
+# This file contains settings for flake8, the code linter we use.
+# A code linter helps identify styling concerns and helps you use
+# a consistent style. You should not need to change this file.
+#
+# The documentation for flake8 configuration is here:
+# https://flake8.pycqa.org/en/latest/user/configuration.html
+
+[flake8]
+exclude = .git
+max-line-length = 119
+docstring-convention = google
+ignore = W2,D100,D101,D102,D103,D104
+
+# Ignored Codes
+#
+# Turning off missing docstrings in editor. These rules *will*
+# be checked during the autograding process.
+# 
+# D100 - Missing docstring in public module
+# D101 - Missing docstring in public class
+# D102 - Missing docstring in public method
+# D103 - Missing docstring in public function
+#
+# Docstring rules: http://www.pydocstyle.org/en/2.1.1/error_codes.html
+#
+# Pedantic whitespace checks are not enabled because they feel
+# just a hint too nitty for an introductory programming course.
+# These rules are *not* checked during the autograding process.
+# 
+# W2	Whitespace warning
+# W291	trailing whitespace
+# W292	no newline at end of file
+# W293	blank line contains whitespace
+# 
+# Whitespace rules: https://pycodestyle.pycqa.org/en/latest/intro.html#error-codes

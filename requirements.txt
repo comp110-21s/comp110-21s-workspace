@@ -1,0 +1,39 @@
+# This file lists libraries we'll depend upon in this course.
+# Keeping these dependencies documented in a file named "requirements.txt" is idiomatic.
+# You can install all these dependencies by runing the command:
+#
+#   python -m pip install -r requirements.txt
+#
+
+# Unit Testing - Automated tests of code.
+pytest
+pytest-reportlog
+
+# Static Typing - Checks type annotations to look for accidental errors.
+mypy
+
+# Code Linting - Checks code for styling consistencies.
+flake8
+flake8-json
+flake8-docstrings
+
+# Refactoring - Improves the ability to rename variables, functions, etc. in VSCode
+rope
+
+# Templating - Helpful when generating files and strings with values to fill in.
+jinja2
+
+# Color ASCII Output in Terminals
+colorama
+
+# Scientific Computing
+pandas
+numpy
+matplotlib
+data-science-types
+
+# Web Server
+flask
+
+# Shell scripting helpers
+shelljob
