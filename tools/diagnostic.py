@@ -50,13 +50,13 @@ def main() -> None:
     test_results = [test_python_in_path(), test_version(), test_pytest(), test_requirements(), test_git_in_PATH()]
     if test_results[4].status:
         test_results.append(test_git_config())
-        test_results.append(test_git_upstream())
+        test_results.append(test_git_backup())
     else:
         test_results.append(test_not_run("Git Configuration Test",
                                          "Check for the existence of git author and email configuration.",
                                          "Git in Path test failed so test not run."))
-        test_results.append(test_not_run("Git Upstream Test",
-                                         "Check for git upstream repo set to the correct place.",
+        test_results.append(test_not_run("Git Backup Test",
+                                         "Check for git backup repo set to the correct place.",
                                          "Git in Path test failed so test not run."))
     print("\n")
     all_passed = True
@@ -193,27 +193,27 @@ def test_git_config() -> Check_Result:
     return git_config_test
 
 
-def test_git_upstream() -> Check_Result:
-    """Test for git upstream repo set to the correct place."""
-    git_upstream_test = Check_Result("Git Upstream Test")
-    git_upstream_test.description = "Check for git upstream repo set to the correct place."
+def test_git_backup() -> Check_Result:
+    """Test for git backup repo set to the correct place."""
+    git_backup_test = Check_Result("Git backup Test")
+    git_backup_test.description = "Check for git backup repo set to the correct place."
     try:
-        upstream = str(subprocess.check_output(["git", "remote", "get-url", "upstream"], stderr=subprocess.STDOUT))
-        git_upstream_test.success_messages.append("Upstream: " + upstream[2:-3])
-        if 'https://github.com/comp110-21s/course-material.git' in upstream:
-            git_upstream_test.status = True
+        backup = str(subprocess.check_output(["git", "remote", "get-url", "backup"], stderr=subprocess.STDOUT))
+        git_backup_test.success_messages.append("backup: " + backup[2:-3])
+        if 'https://github.com/comp110-21s/comp110-workspace-21s-' in backup:
+            git_backup_test.status = True
         else:
-            git_upstream_test.status = False
-            git_upstream_test.fail_messages.append("Upstream did not match course upstream")
-            git_upstream_test.error_codes.append("S204 - Incorrect Upstream found")
+            git_backup_test.status = False
+            git_backup_test.fail_messages.append("backup did not match course backup")
+            git_backup_test.error_codes.append("S204 - Incorrect backup found")
 
     except Exception:
-        upstream = "Upstream not found."
-        git_upstream_test.fail_messages.append("Upstream: " + upstream)
-        git_upstream_test.error_codes.append("S203 - No Upstream found")
+        backup = "backup not found."
+        git_backup_test.fail_messages.append("backup: " + backup)
+        git_backup_test.error_codes.append("S203 - No backup found")
 
-    git_upstream_test.status = True if 'https://github.com/comp110-21s/course-material.git' in upstream else False
-    return git_upstream_test
+    git_backup_test.status = True if 'https://github.com/comp110-21s/comp110-workspace-21s-' in backup else False
+    return git_backup_test
 
 
 def test_pytest() -> Check_Result:
