@@ -6,6 +6,7 @@
 # Python language and libraries and not worth including in your backups.
 
 .vscode/launch.json
+.vscode/settings.json
 
 # Submission Bundles
 **/*.zip
