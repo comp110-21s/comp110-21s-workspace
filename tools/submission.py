@@ -1,8 +1,9 @@
-"""Python module to create a zip file of a Python file or directory for grading.
+"""
+Python module to create a zip file of a Python file or directory for grading.
 
 Usage:
 
-    python -m tools.submission [directory or file]
+    python -m submission [directory or file]
 
 You should run this from within the root directory of a Python project. It will add
 file(s) within the directory, or a given file, and ignore any paths ignored by the
@@ -16,17 +17,37 @@ import sys
 from typing import Set
 from zipfile import ZipFile
 from .helpers import date_prefix
+from pathlib import Path
 
-__author__ = "Kris Jordan <kris@cs.unc.edu>"
+__author__ = ["Kris Jordan <kris@cs.unc.edu>", "Ezri White <ezri@live.unc.edu>"]
 
 
 def main() -> None:
     """Entry point of script. Expects to be run as CLI program."""
     target = parse_args()
-    targetted = expand_globs(".", target, {"**"}) if os.path.isdir(target) else expand_file(".", target)
+    targetted = expand_globs(".", target, {"**"}) if os.path.isdir(target) else {expand_file(".", target)}
     ignored = expand_globs(".", ".", readlines(".gitignore"))
     filtered = targetted.difference(ignored)
-    create_zip(date_prefix("submission.zip"), filtered)
+    if files_exist(filtered):
+        create_zip(date_prefix(parse_file_string(target) + ".zip"), filtered)
+
+
+def files_exist(files: Set[str]) -> bool:
+    """Checks existance of file paths."""
+    for path in files:
+        path = Path(path)
+        if not path.exists():
+            print("Error: Could not find file specified. Double check your spelling and punctuation.")
+            sys.exit(1)
+            return False
+    return True
+
+
+def parse_file_string(path: str) -> str:
+    """Cleans file entry to be used in zip file name."""
+    clean_path = expand_file(".", path)
+    clean_path = clean_path.replace(os.path.sep, "-")
+    return clean_path
 
 
 def parse_args() -> str:
@@ -69,12 +90,12 @@ def expand_globs(root: str, target: str, paths: Set[str]) -> Set[str]:
     return entries
 
 
-def expand_file(root: str, target: str) -> Set[str]:
+def expand_file(root: str, target: str) -> str:
     """Produce a set of a single file for single-script submissions, normalized to relative path."""
     abs_root: str = os.path.realpath(root)
     abs_target: str = os.path.realpath(os.path.join(abs_root, target))
     rel_path: str = abs_target.replace(f"{abs_root}{os.path.sep}", "")
-    return {rel_path}
+    return rel_path
 
 
 def filter_prefixes(source: Set[str], filters: Set[str]) -> Set[str]:

@@ -17,6 +17,7 @@ mypy
 flake8
 flake8-json
 flake8-docstrings
+autopep8
 
 # Refactoring - Improves the ability to rename variables, functions, etc. in VSCode
 rope
