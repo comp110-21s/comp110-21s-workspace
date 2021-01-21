@@ -8,6 +8,7 @@
 # Unit Testing - Automated tests of code.
 pytest
 pytest-reportlog
+pytest-timeout
 
 # Static Typing - Checks type annotations to look for accidental errors.
 mypy
@@ -27,9 +28,13 @@ jinja2
 colorama
 
 # Scientific Computing
-pandas
 numpy
+pandas
 matplotlib
+scikit-learn
+ipykernel
+tabulate
+jupyter
 data-science-types
 
 # Web Server

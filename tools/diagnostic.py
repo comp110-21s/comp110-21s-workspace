@@ -80,7 +80,7 @@ def main() -> None:
         for test in test_results:
             for code in test.error_codes:
                 print(code)
-        print("\nFor information on how to fix: https://20f.comp110.com/diagnostics.html" + bcolors.END)
+        print("\nFor information on how to fix: https://21s.comp110.com/diagnostics.html" + bcolors.END)
         print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
 
 
@@ -105,11 +105,11 @@ def test_python_in_path() -> Check_Result:
             python_in_path_test.success_messages.append("Python Version: " + python_version[2:-3])
         else:
             python_in_path_test.success_messages.append("Python Version: " + python_version[2:-5])
-        if ("Python 3.8" in python_version):
+        if ("Python 3.9" in python_version):
             python_in_path_test.status = True 
         else:
-            python_in_path_test.fail_messages.append("Python interpreter is lower than 3.8.")
-            python_in_path_test.error_codes.append("S102 - python command runs a version less than 3.8 ")
+            python_in_path_test.fail_messages.append("Python interpreter is lower than 3.9.")
+            python_in_path_test.error_codes.append("S102 - python command runs a version less than 3.9 ")
     except Exception:
         python_version = ""
         python_in_path_test.fail_messages.append("Python not installed.")
@@ -122,10 +122,10 @@ def test_version() -> Check_Result:
     version_test = Check_Result("Python Interpreter Test")
     version_test.description = "Python version of interpreter that is being run in the workspace."
     version = sys.version[:3]
-    if float(version) < 3.8:
+    if float(version) < 3.9:
         version_test.fail_messages.append("Python interpreter: " + version)
-        version_test.fail_messages.append("Python interpreter used in workspace is lower than 3.8.")
-        version_test.error_codes.append("S103 - Python version being run in vscode is lower than 3.8")
+        version_test.fail_messages.append("Python interpreter used in workspace is lower than 3.9.")
+        version_test.error_codes.append("S103 - Python version being run in vscode is lower than 3.9")
     else:
         version_test.success_messages.append("Python interpreter: " + version)
         version_test.status = True 
@@ -200,7 +200,7 @@ def test_git_upstream() -> Check_Result:
     try:
         upstream = str(subprocess.check_output(["git", "remote", "get-url", "upstream"], stderr=subprocess.STDOUT))
         git_upstream_test.success_messages.append("Upstream: " + upstream[2:-3])
-        if 'https://github.com/comp110-20f/course-material.git' in upstream:
+        if 'https://github.com/comp110-21s/course-material.git' in upstream:
             git_upstream_test.status = True
         else:
             git_upstream_test.status = False
@@ -212,7 +212,7 @@ def test_git_upstream() -> Check_Result:
         git_upstream_test.fail_messages.append("Upstream: " + upstream)
         git_upstream_test.error_codes.append("S203 - No Upstream found")
 
-    git_upstream_test.status = True if 'https://github.com/comp110-20f/course-material.git' in upstream else False
+    git_upstream_test.status = True if 'https://github.com/comp110-21s/course-material.git' in upstream else False
     return git_upstream_test
 
 
@@ -241,10 +241,7 @@ def test_not_run(test_name, description, message) -> Check_Result:
 
 
 def search_path(**kwargs) -> list:
-    """Searches PATH for given executable strings.
-    
-    Returns the list of executable paths; returns None if no path found.
-    """
+    """Searches PATH for given executable strings and returns the list of executable paths; returns None if no path found."""
     matches = []
     for key, val in kwargs.items():
         match = shutil.which(val)
