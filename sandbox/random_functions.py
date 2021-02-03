@@ -10,7 +10,7 @@ random_float: float = random()
 print("A random_float: " + str(random_float))
 
 # The randint function produces a random int
-# between the given arguments, not inclusive
-# of the second argument.
+# between the given arguments, inclusive of 
+# the second argument.
 random_int: int = randint(0, 100)
 print("A random int: " + str(random_int))
