@@ -22,4 +22,5 @@
     "python.testing.pytestArgs": [],
     "python.envFile": "${workspaceFolder}/.env",
     "python.analysis.typeCheckingMode": "basic",
+    "python.pythonPath": "/Library/Frameworks/Python.framework/Versions/3.9/bin/python",
 }
