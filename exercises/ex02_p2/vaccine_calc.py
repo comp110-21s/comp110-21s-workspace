@@ -19,7 +19,7 @@ def main() -> None:
 # TODO 1: Define days_to_target function
 
 
-# TODO 2: Define future_date function
+# TODO 3: Define future_date function
 
 
 if __name__ == "__main__":
