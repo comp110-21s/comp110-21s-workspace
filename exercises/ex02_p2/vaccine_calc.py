@@ -1,4 +1,4 @@
-"""Fortune cookie exercise as a structured program."""
+"""Vaccine calculator exercise as a structured program."""
 
 from datetime import datetime, timedelta
 
